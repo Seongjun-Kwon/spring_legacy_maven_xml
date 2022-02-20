@@ -11,7 +11,7 @@
     </appender>
 
     <!-- Application Loggers -->
-    <logger name="com.tistory.modaljoa.sample">
+    <logger name="com.tistory.modaljoa">
         <level value="info" />
     </logger>
 
