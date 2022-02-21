@@ -2,6 +2,8 @@ package com.tistory.modaljoa.persistence;
 
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
+import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,12 +23,29 @@ public class DataSourceTests {
     @Setter(onMethod_ = @Autowired)
     private DataSource dataSource;
 
+    @Setter(onMethod_ = @Autowired)
+    private SqlSessionFactory sqlSessionFactory;
+
     @Test
     public void testConnection() {
 
         try (Connection conn = dataSource.getConnection()) {
 
             log.info(conn);
+        } catch (Exception e) {
+            fail(e.getMessage());
+        }
+    }
+
+    @Test
+    public void testMyBatis() {
+
+        try (SqlSession session = sqlSessionFactory.openSession();
+             Connection conn = session.getConnection();
+        ) {
+
+            log.info(conn);
+            log.info(session);
         } catch (Exception e) {
             fail(e.getMessage());
         }
