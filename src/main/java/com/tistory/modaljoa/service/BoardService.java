@@ -1,6 +1,7 @@
 package com.tistory.modaljoa.service;
 
 import com.tistory.modaljoa.domain.BoardVO;
+import com.tistory.modaljoa.domain.Criteria;
 
 import java.util.List;
 
@@ -14,5 +15,7 @@ public interface BoardService {
 
     public boolean remove(Long bno);
 
-    public List<BoardVO> getList();
+//    public List<BoardVO> getList();
+
+    public List<BoardVO> getList(Criteria criteria);
 }

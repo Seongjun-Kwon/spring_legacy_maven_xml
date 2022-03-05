@@ -1,6 +1,7 @@
 package com.tistory.modaljoa.service;
 
 import com.tistory.modaljoa.domain.BoardVO;
+import com.tistory.modaljoa.domain.Criteria;
 import com.tistory.modaljoa.mapper.BoardMapper;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
@@ -47,11 +48,19 @@ public class BoardServiceImpl implements BoardService {
         return mapper.delete(bno) == 1;
     }
 
+//    @Override
+//    public List<BoardVO> getList() {
+//
+//        log.info("getList............");
+//
+//        return mapper.getList();
+//    }
+
     @Override
-    public List<BoardVO> getList() {
+    public List<BoardVO> getList(Criteria cri) {
 
-        log.info("getList............");
+        log.info("get List with criteria: " + cri);
 
-        return mapper.getList();
+        return mapper.getListWithPaging(cri);
     }
 }
