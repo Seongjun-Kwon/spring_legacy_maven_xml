@@ -19,14 +19,6 @@ public class BoardController {
 
     private BoardService service;
 
-//    @GetMapping("/list")
-//    public void list(Model model) {
-//
-//        log.info("list");
-//
-//        model.addAttribute("list", service.getList());
-//    }
-
     @GetMapping("/list")
     public void list(Criteria cri, Model model) {
 
@@ -77,6 +69,8 @@ public class BoardController {
 
         rttr.addAttribute("pageNum", cri.getPageNum());
         rttr.addAttribute("amount", cri.getAmount());
+        rttr.addAttribute("type", cri.getType());
+        rttr.addAttribute("keyword", cri.getKeyword());
 
         return "redirect:/board/list";
     }
