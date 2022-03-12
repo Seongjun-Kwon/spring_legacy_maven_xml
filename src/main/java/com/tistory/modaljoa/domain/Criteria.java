@@ -3,6 +3,7 @@ package com.tistory.modaljoa.domain;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.springframework.web.util.UriComponentsBuilder;
 
 
 @ToString
@@ -28,5 +29,15 @@ public class Criteria {
   public String[] getTypeArr() {
     
     return type == null? new String[] {}: type.split("");
+  }
+
+  public String getListLink() {
+    UriComponentsBuilder builder = UriComponentsBuilder.fromPath("")
+            .queryParam("pageNum", this.pageNum)
+            .queryParam("amount", this.amount)
+            .queryParam("type", this.type)
+            .queryParam("keyword", this.keyword);
+
+    return builder.toUriString();
   }
 }
