@@ -1,6 +1,7 @@
 package com.tistory.modaljoa.service;
 
 import com.tistory.modaljoa.domain.Criteria;
+import com.tistory.modaljoa.domain.ReplyPageDTO;
 import com.tistory.modaljoa.domain.ReplyVO;
 import com.tistory.modaljoa.mapper.ReplyMapper;
 import lombok.AllArgsConstructor;
@@ -54,5 +55,11 @@ public class ReplyServiceImpl implements ReplyService {
         log.info("get List: " + bno);
 
         return mapper.getListWithPaging(cri, bno);
+    }
+
+    @Override
+    public ReplyPageDTO getListPage(Criteria cri, Long bno) {
+
+        return new ReplyPageDTO(mapper.getCountByBno(bno), mapper.getListWithPaging(cri, bno));
     }
 }

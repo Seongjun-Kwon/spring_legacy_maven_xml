@@ -72,7 +72,8 @@ public class BoardController {
         rttr.addAttribute("type", cri.getType());
         rttr.addAttribute("keyword", cri.getKeyword());
 
-        return "redirect:/board/list" + cri.getListLink();
+//        return "redirect:/board/list" + cri.getListLink();
+        return "redirect:/board/list";
     }
 
     @PostMapping("/remove")
@@ -89,6 +90,7 @@ public class BoardController {
         rttr.addAttribute("type", cri.getType());
         rttr.addAttribute("keyword", cri.getKeyword());
 
-        return "redirect:/board/list" + cri.getListLink();
+//        return "redirect:/board/list" + cri.getListLink();
+        return "redirect:/board/list";
     }
 }
