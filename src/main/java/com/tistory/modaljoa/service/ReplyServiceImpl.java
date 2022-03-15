@@ -3,10 +3,12 @@ package com.tistory.modaljoa.service;
 import com.tistory.modaljoa.domain.Criteria;
 import com.tistory.modaljoa.domain.ReplyPageDTO;
 import com.tistory.modaljoa.domain.ReplyVO;
+import com.tistory.modaljoa.mapper.BoardMapper;
 import com.tistory.modaljoa.mapper.ReplyMapper;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -16,11 +18,15 @@ import java.util.List;
 public class ReplyServiceImpl implements ReplyService {
 
     private ReplyMapper mapper;
+    private BoardMapper boardMapper;
 
+    @Transactional
     @Override
     public int register(ReplyVO reply) {
 
         log.info("register: " + reply);
+
+        boardMapper.updateReplyCnt(reply.getBno(), 1);
 
         return mapper.insert(reply);
     }
@@ -33,10 +39,15 @@ public class ReplyServiceImpl implements ReplyService {
         return mapper.read(rno);
     }
 
+    @Transactional
     @Override
     public int remove(Long rno) {
 
         log.info("remove: " + rno);
+
+        ReplyVO reply = mapper.read(rno);
+
+        boardMapper.updateReplyCnt(reply.getBno(), -1);
 
         return mapper.delete(rno);
     }
